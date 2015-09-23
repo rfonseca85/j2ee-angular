@@ -13,44 +13,36 @@ public class Book {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id")
 	@SequenceGenerator(name = "id", sequenceName = "id")
 	private Long id;
+	
 	private String name;
 	private String description;
 	private String imageUrl;
 	
-	
-	//get set
 	public Long getId() {
 		return id;
 	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 	public String getDescription() {
 		return description;
 	}
-
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
 	public String getImageUrl() {
 		return imageUrl;
 	}
-
-	public void setImageUrl(String link) {
-		this.imageUrl = link;
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
-
+	
 	
 	@Override
 	public int hashCode() {
@@ -59,7 +51,7 @@ public class Book {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -76,6 +68,10 @@ public class Book {
 			return false;
 		return true;
 	}
+	
+	
+
+
 
 	
 }
