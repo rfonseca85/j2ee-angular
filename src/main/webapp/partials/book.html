@@ -1,0 +1,75 @@
+<div class="container">
+
+	<h1>Books</h1>
+
+	<br>
+
+	<div class="grid">
+		<div>
+			<h3>List Books</h3>
+		</div>
+
+		<!-- Grid -->
+		<div class="gridStyle" ng-grid="gridOptions"></div>
+		<pagination direction-links="true" boundary-links="true" total-items="books.totalResults" items-per-page="books.pageSize" ng-model="books.currentPage" ng-change="refreshGrid()"> </pagination>
+	</div>
+
+	<div class="form">
+		<!-- Verify book, if there is no id present, that we are Adding a Book -->
+		<div ng-if="book.id == null">
+			<h3>Add Book</h3>
+		</div>
+		<!-- Otherwise it's an Edit -->
+		<div ng-if="book.id != null">
+			<h3>Edit Book</h3>
+		</div>
+
+		<div>
+			<!-- Specify the function to be called on submit and disable HTML5 validation, since we're using Angular validation-->
+			<form name="bookForm" ng-submit="updateBook()" novalidate>
+
+				<!-- Display an error if the input is invalid and is dirty (only when someone changes the value) -->
+				<div class="form-group" ng-class="{'has-error' : bookForm.name.$invalid && bookForm.name.$dirty}">
+					<label for="name">Name:</label>
+					<!-- Display a check when the field is valid and was modified -->
+					<span ng-class="{'glyphicon glyphicon-ok' : bookForm.name.$valid && bookForm.name.$dirty}"></span> <input id="name" name="name" type="text" class="form-control" maxlength="50" ng-model="book.name" required ng-minlength="2" ng-maxlength="50" popover="Name must be at least 2 characters long." popover-trigger="focus" />
+
+					<p class="help-block" ng-show="bookForm.name.$error.minlength">Name must be at least 2 characters long.</p>
+					<p class="help-block" ng-show="bookForm.name.$error.maxlength">Name cannot be longer than 50 characters.</p>
+				</div>
+
+				<!-- Display an error if the input is invalid and is dirty (only when someone changes the value) -->
+				<div class="form-group" ng-class="{'has-error' : bookForm.description.$invalid && bookForm.description.$dirty}">
+					<label for="description">Description:</label>
+					<!-- Display a check when the field is valid and was modified -->
+					<span ng-class="{'glyphicon glyphicon-ok' : bookForm.description.$valid && bookForm.description.$dirty}"></span> <input id="description" name="description" type="text" class="form-control" maxlength="100" ng-model="book.description" required ng-minlength="5" ng-maxlength="100" />
+
+					<!-- Validation messages to be displayed on required, minlength and maxlength -->
+					<p class="help-block" ng-show="bookForm.description.$error.minlength">Description must be at least 5 characters long.</p>
+					<p class="help-block" ng-show="bookForm.description.$error.maxlength">Description cannot be longer than 100 characters.</p>
+				</div>
+
+				<!-- Display an error if the input is invalid and is dirty (only when someone changes the value) -->
+				<div class="form-group" ng-class="{'has-error' : bookForm.imageUrl.$invalid && bookForm.imageUrl.$dirty}">
+					<label for="imageUrl">Image URL:</label>
+					<!-- Display a check when the field is valid and was modified -->
+					<span ng-class="{'glyphicon glyphicon-ok' : bookForm.imageUrl.$valid && bookForm.imageUrl.$dirty}"></span> <input id="imageUrl" name="imageUrl" type="url" class="form-control" maxlength="500" ng-model="book.imageUrl" required />
+
+					<!-- Validation messages to be displayed on required and invalid. Type 'url' makes checks to a proper url format. -->
+					<p class="help-block" ng-show="bookForm.imageUrl.$invalid && bookForm.imageUrl.$dirty">Invalid Image URL.</p>
+				</div>
+
+				<div class="avatar" ng-if="book.imageUrl">
+					<img ng-src="{{book.imageUrl}}" width="200" height="300" />
+				</div>
+
+				<!-- Form buttons. The 'Save' button is only enabled when the form is valid. -->
+				<div class="buttons">
+					<button type="button" class="btn btn-primary" ng-click="clearForm()">Clear</button>
+					<button type="submit" class="btn btn-primary" ng-disabled="bookForm.$invalid">Save</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+

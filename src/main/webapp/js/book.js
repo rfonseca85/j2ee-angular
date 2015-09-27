@@ -1,7 +1,7 @@
-var app = angular.module('books', ['ngResource', 'ngGrid', 'ui.bootstrap']);
+var bookControllers = angular.module('bookControllers', []);
 
 // Create a controller with name booksListController to bind to the grid section.
-app.controller('booksListController', function ($scope, $rootScope, bookService) {
+bookControllers.controller('bookCtrl', function ($scope, $rootScope, bookService) {
     // Initialize required information: sorting, the first page to show and the grid options.
     $scope.sortInfo = {fields: ['id'], directions: ['asc']};
     $scope.books = {currentPage: 1};
@@ -12,10 +12,11 @@ app.controller('booksListController', function ($scope, $rootScope, bookService)
         sortInfo: $scope.sortInfo,
 
         columnDefs: [
-            { field: 'id', displayName: 'Id' },
+            { field: 'id', width: 30, displayName: 'Id' },
             { field: 'name', displayName: 'Name' },
             { field: 'description', displayName: 'Description' },
-            { field: '', width: 30, cellTemplate: '<span class="glyphicon glyphicon-remove remove" ng-click="deleteRow(row)"></span>' }
+            { field: 'imageUrl', height: 60,  displayName: '', "cellTemplate":"<img ng-src=\"{{row.getProperty('imageUrl')}}\" border=\"0\" width=\"100\" height=\"100\">" },
+            { field: 'i', width: 30, cellTemplate: '<span class="glyphicon glyphicon-remove remove" ng-click="deleteRow(row)"></span>' }
         ],
 
         multiSelect: false,
@@ -67,12 +68,9 @@ app.controller('booksListController', function ($scope, $rootScope, bookService)
 
     // Picks the event broadcasted when the form is cleared to also clear the grid selection.
     $scope.$on('clear', function () {
-        $scope.gridOptions.selectAll(false);
+        $scope.gridOptions.selectedItems(false);
     });
-});
 
-// Create a controller with name booksFormController to bind to the form section.
-app.controller('booksFormController', function ($scope, $rootScope, bookService) {
     // Clears the form. Either by clicking the 'Clear' button in the form, or when a successfull save is performed.
     $scope.clearForm = function () {
         $scope.book = null;
@@ -126,7 +124,7 @@ app.controller('booksFormController', function ($scope, $rootScope, bookService)
 });
 
 // Create a controller with name alertMessagesController to bind to the feedback messages section.
-app.controller('alertMessagesController', function ($scope) {
+bookControllers.controller('alertMessagesController', function ($scope) {
     // Picks up the event to display a saved message.
     $scope.$on('bookSaved', function () {
         $scope.alerts = [
@@ -154,6 +152,6 @@ app.controller('alertMessagesController', function ($scope) {
 });
 
 // Service that provides books operations
-app.factory('bookService', function ($resource) {
+bookControllers.factory('bookService', function ($resource) {
     return $resource('resources/books/:id');
 });

@@ -5,6 +5,15 @@ body {
     text-align: center;
 }
 
+.navbar {
+    padding: 0;
+    border: 0px;
+}
+
+.navbar-brand {
+	padding-top: .70em;
+}
+
 h3 {
     margin: 0 0 20px;
     text-align: left;
@@ -16,10 +25,10 @@ h3 {
 }
 
 .grid {
-    width: 100%;
+    width: 40%;
     float: left;
-    margin-left: 0%;
-    margin-right: 0%;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 .grid .remove {
@@ -36,8 +45,8 @@ h3 {
 
 .form {
     width: 40%;
-    float: left;
-    margin-left: 0%;
+    float: right;
+    margin-left: 5%;
     margin-right: 5%;
     text-align: left;
 }
@@ -68,8 +77,8 @@ h3 {
 
 .form .avatar {
     height: 250px;
-    float: left;
-    margin-right: 25px;
+    float: right;
+    margin-right: 200px;
 }
 
 .form .buttons {
