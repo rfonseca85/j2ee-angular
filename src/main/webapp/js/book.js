@@ -68,7 +68,7 @@ bookControllers.controller('bookCtrl', function ($scope, $rootScope, bookService
 
     // Picks the event broadcasted when the form is cleared to also clear the grid selection.
     $scope.$on('clear', function () {
-        $scope.gridOptions.selectedItems(false);
+        //$scope.gridOptions.selectedItems(false);
     });
 
     // Clears the form. Either by clicking the 'Clear' button in the form, or when a successfull save is performed.

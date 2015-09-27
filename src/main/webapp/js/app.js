@@ -39,6 +39,10 @@ app.config([ '$routeProvider', function($routeProvider) {
 		templateUrl : 'partials/page3.html',
 		controller : 'page3Ctrl'})		
 
+	.when('/login', {
+		templateUrl : 'partials/login.html',
+		controller : 'loginCtrl'})				
+		
 	.otherwise({
 		redirectTo : '/home'});
 	
