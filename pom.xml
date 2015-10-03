@@ -6,7 +6,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>j2ee-angular</name>
-	<description>j2ee-angular</description>
+	<description>j2ee-angular novo</description>
 
     <properties>
         <!-- Project -->
